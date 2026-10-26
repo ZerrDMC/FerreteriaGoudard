@@ -916,6 +916,48 @@
                 toggleCart();
             }
         }
+        function payWithApp(platform) {
+    if (cart.length === 0) {
+        alert('Tu carrito está vacío. Agrega productos antes de pagar.');
+        return;
+    }
+
+    const alias = "¡es de prueba no mandes dinero!";
+    const totalPrice = document.getElementById('cart-total-price').textContent;
+
+    // Mostrar el mensaje con el alias antes de abrir la aplicación
+    alert(`Alias de pago: ${alias}\nTotal: ${totalPrice}\n\nSe abrirá la aplicación de ${platform} para completar la transferencia.`);
+
+    let appScheme = '';
+    let storeUrl = '';
+
+    if (platform === 'Mercado Pago') {
+        appScheme = 'mercadopago://';
+        storeUrl = 'https://play.google.com/store/apps/details?id=com.mercadopagoData';
+    } else if (platform === 'MODO') {
+        appScheme = 'modo://';
+        storeUrl = 'https://play.google.com/store/apps/details?id=com.modo.app';
+    } else if (platform === 'Ualá') {
+        appScheme = 'uala://';
+        storeUrl = 'https://play.google.com/store/apps/details?id=com.uala';
+    } else {
+        alert('Procesando pago web seguro...');
+        return;
+    }
+
+    // Intentar abrir la aplicación de manera automática
+    const start = Date.now();
+    window.location.href = appScheme;
+
+    // Si la app no está instalada, redirigir a la tienda correspondiente
+    setTimeout(function() {
+        const elapsed = Date.now() - start;
+        if (elapsed < 1500) {
+            window.location.href = storeUrl;
+        }
+    }, 1000);
+        }
+        
     </script>
 </body>
 </html>
