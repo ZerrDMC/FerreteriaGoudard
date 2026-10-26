@@ -3,532 +3,948 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IndustrialPro | Herramientas, Tornillos y Máquinas</title>
+    <title>Ferretería Central | Herramientas y Soluciones para el Hogar y la Construcción</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary-color: #1e293b;
-            --accent-color: #f59e0b;
-            --bg-light: #f8fafc;
-            --text-main: #334155;
+            --primary: #1A2530; /* Azul industrial oscuro */
+            --accent: #E67E22;  /* Naranja ferretería */
+            --bg-light: #F4F6F7;
+            --card-bg: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-muted: #7F8C8D;
+            --transition: all 0.3s ease;
         }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
+
         body {
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-light);
-            color: var(--text-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-top: 75px;
         }
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        h1, h2, h3, .logo {
+            font-weight: 700;
         }
-        header h1 {
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: var(--accent-color);
-        }
-        .hero {
-            background: linear-gradient(rgba(30, 41, 59, 0.85), rgba(30, 41, 59, 0.85)), url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-            padding: 5rem 1rem;
-        }
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #cbd5e1;
-        }
-        .btn {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-        .btn:hover {
-            background-color: #d97706;
-            color: white;
-        }
+
         .container {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 1rem;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2.5rem;
-            color: var(--primary-color);
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        .card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        }
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 1.5rem;
-        }
-        .card-content span {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: #64748b;
-            font-weight: bold;
-        }
-        .card-content h3 {
-            font-size: 1.25rem;
-            margin: 0.5rem 0;
-            color: var(--primary-color);
-        }
-        .price {
-            font-size: 1.35rem;
-            font-weight: bold;
-            color: #059669;
-            margin: 1rem 0;
-        }
-        .card button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-        .card button:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* Botón flotante del carrito */
-        .cart-float-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 50px;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 999;
-            transition: transform 0.2s;
-        }
-        .cart-float-btn:hover {
-            transform: scale(1.05);
-        }
-        .cart-badge {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 50%;
-            font-size: 0.9rem;
-        }
-
-        /* Menú lateral del carrito (Drawer) */
-        .cart-drawer {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 100%;
-            max-width: 400px;
-            height: 100%;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.15);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            transition: right 0.3s ease-in-out;
-        }
-        .cart-drawer.open {
-            right: 0;
-        }
-        .cart-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .close-cart {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .cart-body {
-            padding: 1.5rem;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 0.75rem 0;
-        }
-        .cart-item-info h4 {
-            font-size: 0.95rem;
-            color: var(--primary-color);
-        }
-        .cart-item-info p {
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-        .cart-item-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .cart-item-actions button {
-            background: #e2e8f0;
-            border: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .cart-footer {
-            padding: 1.5rem;
-            background: #f1f5f9;
-            border-top: 1px solid #e2e8f0;
-        }
-        .total-section {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-        .payment-methods {
-            margin-bottom: 1rem;
-        }
-        .payment-methods label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        .payment-methods select {
-            width: 100%;
-            padding: 0.6rem;
-            border-radius: 4px;
-            border: 1px solid #cbd5e1;
-            font-size: 0.95rem;
-        }
-        .checkout-btn {
-            width: 100%;
-            background-color: #059669;
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .checkout-btn:hover {
-            background-color: #047857;
-        }
-        .overlay {
+        /* HEADER */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 998;
-            display: none;
+            background: rgba(26, 37, 48, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
-        .overlay.active {
-            display: block;
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 15px 20px;
         }
-        footer {
-            background-color: var(--primary-color);
+
+        .logo {
+            font-size: 1.6rem;
             color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        footer p {
-            color: #94a3b8;
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* INDICADOR DE CARRITO */
+        .cart-indicator {
+            background-color: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            z-index: 1001;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .cart-indicator:hover {
+            background-color: #d35400;
+        }
+
+        .cart-indicator.bounce {
+            animation: bounceEffect 0.5s ease;
+        }
+
+        @keyframes bounceEffect {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); background-color: #e67e22; }
+        }
+
+        /* TOAST NOTIFICACIÓN */
+        .toast-notification {
+            position: fixed;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--accent);
+        }
+
+        .toast-notification.show {
+            bottom: 30px;
+        }
+
+        .toast-notification i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* HERO */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(26, 37, 48, 0.85), rgba(26, 37, 48, 0.85)), url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background-color: var(--accent);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            margin-bottom: 30px;
+            color: #bdc3c7;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background-color: #d35400;
+        }
+
+        /* MENÚ / CATÁLOGO */
+        .menu {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        .menu-category-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin: 40px 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 8px;
+        }
+
+        .menu-category-title i {
+            color: var(--accent);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .menu-inner-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .menu-inner-box h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+        }
+
+        .menu-inner-box p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            min-height: 40px;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.15rem;
+        }
+
+        /* CONTROL DE CANTIDAD (+ / -) */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 4px 10px;
+        }
+
+        .qty-control button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .qty-control button:hover {
+            background-color: var(--accent);
+        }
+
+        .qty-control span {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+
+        /* BOTÓN AGREGAR AL PEDIDO */
+        .btn-add {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
             font-size: 0.9rem;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-add:hover {
+            background-color: var(--accent);
+        }
+
+        /* CARRITO LATERAL (DRAWER) */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+            z-index: 3000;
+            transition: right 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 40px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item h4 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+
+        .cart-item p {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* SECCIÓN DE MÉTODOS DE PAGO INTELIGENTE */
+        .payment-section {
+            margin-top: 10px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+
+        .payment-section h4 {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .btn-payment {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 9px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+            color: var(--text-dark);
+        }
+
+        .btn-payment:hover {
+            border-color: var(--accent);
+            background-color: #fdf6ec;
+        }
+
+        /* CONTACTO Y FOOTER */
+        .contact {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .map-box {
+            background: var(--primary);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .map-box i {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        .map-box p {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .map-note {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .cart-drawer {
+                width: 100%;
+                right: -100%;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>IndustrialPro ⚙️</h1>
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#catalogo">Catálogo</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
+    <!-- TOAST NOTIFICACIÓN -->
+    <div id="toast-notification" class="toast-notification">
+        <i class="fa-solid fa-circle-check"></i> <span id="toast-msg">¡Producto agregado al pedido!</span>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fa-solid fa-screwdriver-wrench"></i> Ferretería <span>Central</span></a>
+            <div id="cart-btn" class="cart-indicator" onclick="toggleCart()">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
     </header>
 
-    <section id="inicio" class="hero">
-        <h2>Equipamiento e Insumos para la Industria y el Taller</h2>
-        <p>Herramientas de alta precisión, tornillería especializada y sistemas de lubricación.</p>
-        <a href="#catalogo" class="btn">Ver Catálogo</a>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">Herramientas & Materiales • Envíos a todo el país</span>
+            <h1>Todo para tu obra, taller y hogar</h1>
+            <p>Encuentra herramientas eléctricas, tornillería, plomería, electricidad y los mejores insumos con atención especializada.</p>
+            <a href="#menu" class="btn-primary">Ver Catálogo de Productos</a>
+        </div>
     </section>
 
-    <div class="container" id="catalogo">
-        <h2 class="section-title">Productos Destacados</h2>
-        
-        <div class="grid">
-            <!-- Producto 1 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="Taladro Percutor">
-                <div class="card-content">
-                    <span>Herramientas Eléctricas</span>
-                    <h3>Taladro Percutor Profesional 850W</h3>
-                    <p class="price" data-value="145000">$145.000</p>
-                    <button onclick="addToCart('Taladro Percutor Profesional 850W', 145000)">Agregar al Carrito</button>
+    <!-- CATÁLOGO / MENÚ -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <div class="section-title">
+                <h2>Catálogo Destacado</h2>
+                <p>Selecciona la cantidad que necesitas y agrégalo directamente a tu pedido.</p>
+            </div>
+
+            <!-- SECCIÓN HERRAMIENTAS ELÉCTRICAS -->
+            <h3 class="menu-category-title"><i class="fa-solid fa-bolt"></i> Herramientas Eléctricas & Inalámbricas</h3>
+            <div class="menu-grid">
+                <div class="menu-card" id="card-1">
+                    <div class="menu-inner-box">
+                        <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="Taladro Percutor" class="product-img">
+                        <h3>Taladro Percutor 600W</h3>
+                        <p>Mandril de 13mm con velocidad variable y reversa.</p>
+                        <span class="price">$48.500</span>
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty('prod-1', -1)">-</button>
+                            <span id="qty-prod-1">1</span>
+                            <button type="button" onclick="changeQty('prod-1', 1)">+</button>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addItemWithAnimation(event, 'Taladro Percutor 600W', 48500, 'prod-1', 'card-1')">Agregar al pedido</button>
+                    </div>
+                </div>
+                <div class="menu-card" id="card-2">
+                    <div class="menu-inner-box">
+                        <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=600&q=80" alt="Amoladora Angular" class="product-img">
+                        <h3>Amoladora Angular 4 1/2"</h3>
+                        <p>Potencia de 800W, diseño ergonómico para corte y desbaste.</p>
+                        <span class="price">$55.000</span>
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty('prod-2', -1)">-</button>
+                            <span id="qty-prod-2">1</span>
+                            <button type="button" onclick="changeQty('prod-2', 1)">+</button>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addItemWithAnimation(event, 'Amoladora Angular 4 1/2', 55000, 'prod-2', 'card-2')">Agregar al pedido</button>
+                    </div>
+                </div>
+                <div class="menu-card" id="card-3">
+                    <div class="menu-inner-box">
+                        <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" alt="Atornillador Inalámbrico" class="product-img">
+                        <h3>Atornillador a Batería 12V</h3>
+                        <p>Incluye maletín, cargador rápido y juego de puntas.</p>
+                        <span class="price">$62.300</span>
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty('prod-3', -1)">-</button>
+                            <span id="qty-prod-3">1</span>
+                            <button type="button" onclick="changeQty('prod-3', 1)">+</button>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addItemWithAnimation(event, 'Atornillador a Batería 12V', 62300, 'prod-3', 'card-3')">Agregar al pedido</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Producto 2 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&q=80" alt="Tornillos y Fijaciones">
-                <div class="card-content">
-                    <span>Tornillería</span>
-                    <h3>Kit Tornillos Allen Alta Resistencia (Caja x 500u)</h3>
-                    <p class="price" data-value="32400">$32.400</p>
-                    <button onclick="addToCart('Kit Tornillos Allen Alta Resistencia', 32400)">Agregar al Carrito</button>
+            <!-- SECCIÓN CONSTRUCCIÓN E INSUMOS -->
+            <h3 class="menu-category-title" style="margin-top: 50px;"><i class="fa-solid fa-hammer"></i> Construcción & Fijaciones</h3>
+            <div class="menu-grid">
+                <div class="menu-card" id="card-4">
+                    <div class="menu-inner-box">
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80" alt="Caja de Tornillos" class="product-img">
+                        <h3>Kit Tornillos Tarugos (x100)</h3>
+                        <p>Variedad de medidas para mampostería y madera.</p>
+                        <span class="price">$8.500</span>
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty('prod-4', -1)">-</button>
+                            <span id="qty-prod-4">1</span>
+                            <button type="button" onclick="changeQty('prod-4', 1)">+</button>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addItemWithAnimation(event, 'Kit Tornillos Tarugos x100', 8500, 'prod-4', 'card-4')">Agregar al pedido</button>
+                    </div>
+                </div>
+                <div class="menu-card" id="card-5">
+                    <div class="menu-inner-box">
+                        <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&q=80" alt="Silicona y Adhesivos" class="product-img">
+                        <h3>Silicona Neutra Transparente</h3>
+                        <p>Sellador multiuso de alta adherencia para baños y cocinas.</p>
+                        <span class="price">$6.200</span>
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty('prod-5', -1)">-</button>
+                            <span id="qty-prod-5">1</span>
+                            <button type="button" onclick="changeQty('prod-5', 1)">+</button>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addItemWithAnimation(event, 'Silicona Neutra Transparente', 6200, 'prod-5', 'card-5')">Agregar al pedido</button>
+                    </div>
+                </div>
+                <div class="menu-card" id="card-6">
+                    <div class="menu-inner-box">
+                        <img src="https://images.unsplash.com/photo-1513467123538-4e8a5b28d447?auto=format&fit=crop&w=600&q=80" alt="Cinta Métrica" class="product-img">
+                        <h3>Cinta Métrica Profesional 5m</h3>
+                        <p>Cinta reforzada con freno automático y carcasa de goma anti-impacto.</p>
+                        <span class="price">$7.400</span>
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty('prod-6', -1)">-</button>
+                            <span id="qty-prod-6">1</span>
+                            <button type="button" onclick="changeQty('prod-6', 1)">+</button>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addItemWithAnimation(event, 'Cinta Métrica Profesional 5m', 7400, 'prod-6', 'card-6')">Agregar al pedido</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Producto 3 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80" alt="Lubricador Neumático">
-                <div class="card-content">
-                    <span>Lubricación</span>
-                    <h3>Lubricador para Máquinas Neumáticas</h3>
-                    <p class="price" data-value="20995">$20.995</p>
-                    <button onclick="addToCart('Lubricador para Máquinas Neumáticas', 20995)">Agregar al Carrito</button>
+            <!-- SECCIÓN PLOMERÍA Y JARDÍN -->
+            <h3 class="menu-category-title" style="margin-top: 50px;"><i class="fa-solid fa-faucet"></i> Plomería & Jardín</h3>
+            <div class="menu-grid">
+                <div class="menu-card" id="card-7">
+                    <div class="menu-inner-box">
+                        <img src="https://images.unsplash.com/photo-1584467735871-8e853e8a4d2e?auto=format&fit=crop&w=600&q=80" alt="Llave Inglesa" class="product-img">
+                        <h3>Llave Inglesa Ajustable 10"</h3>
+                        <p>Acero al cromo vanadio forjado de alta resistencia.</p>
+                        <span class="price">$12.900</span>
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty('prod-7', -1)">-</button>
+                            <span id="qty-prod-7">1</span>
+                            <button type="button" onclick="changeQty('prod-7', 1)">+</button>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addItemWithAnimation(event, 'Llave Inglesa Ajustable 10', 12900, 'prod-7', 'card-7')">Agregar al pedido</button>
+                    </div>
+                </div>
+                <div class="menu-card" id="card-8">
+                    <div class="menu-inner-box">
+                        <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=600&q=80" alt="Manguera de Riego" class="product-img">
+                        <h3>Manguera Reforzada 1/2" (15m)</h3>
+                        <p>Antitorsión con conexiones rápidas y pistola rociadora.</p>
+                        <span class="price">$18.500</span>
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty('prod-8', -1)">-</button>
+                            <span id="qty-prod-8">1</span>
+                            <button type="button" onclick="changeQty('prod-8', 1)">+</button>
+                        </div>
+                        <button type="button" class="btn-add" onclick="addItemWithAnimation(event, 'Manguera Reforzada 1/2 15m', 18500, 'prod-8', 'card-8')">Agregar al pedido</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Producto 4 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" alt="Compresor de Aire">
-                <div class="card-content">
-                    <span>Máquinas</span>
-                    <h3>Compresor de Aire Monofásico 50 Litros</h3>
-                    <p class="price" data-value="380000">$380.000</p>
-                    <button onclick="addToCart('Compresor de Aire Monofásico 50L', 380000)">Agregar al Carrito</button>
-                </div>
-            </div>
-
-            <!-- Producto 5 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=600&q=80" alt="Aflojatodo y Lubricante">
-                <div class="card-content">
-                    <span>Insumos Químicos</span>
-                    <h3>Afloja Tuercas y Lubricante Multiuso 400ml</h3>
-                    <p class="price" data-value="5300">$5.300</p>
-                    <button onclick="addToCart('Afloja Tuercas y Lubricante 400ml', 5300)">Agregar al Carrito</button>
-                </div>
-            </div>
-
-            <!-- Producto 6 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" alt="Set de Llaves Combinadas">
-                <div class="card-content">
-                    <span>Herramientas Manuales</span>
-                    <h3>Set de Llaves Combinadas Cromo Vanadio (12 Pzas)</h3>
-                    <p class="price" data-value="48500">$48.500</p>
-                    <button onclick="addToCart('Set de Llaves Combinadas (12 Pzas)', 48500)">Agregar al Carrito</button>
-                </div>
-            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Botón Flotante del Carrito -->
-    <button class="cart-float-btn" onclick="toggleCart()">
-        🛒 Carrito <span class="cart-badge" id="cartCount">0</span>
-    </button>
-
-    <!-- Fondo Oscuro al Abrir Carrito -->
-    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
-
-    <!-- Menú Desplegable Lateral del Carrito -->
-    <div class="cart-drawer" id="cartDrawer">
+    <!-- CARRITO LATERAL (DRAWER) CON PASARELA DE PAGO INTELIGENTE -->
+    <div id="cart-drawer" class="cart-drawer">
         <div class="cart-header">
-            <h3>Tu Carrito de Compras</h3>
-            <button class="close-cart" onclick="toggleCart()">&times;</button>
+            <h3><i class="fa-solid fa-basket-shopping"></i> Tu Carrito de Compras</h3>
+            <button type="button" onclick="toggleCart()" class="close-cart">&times;</button>
         </div>
-        <div class="cart-body" id="cartItems">
-            <p style="text-align: center; color: #64748b; margin-top: 2rem;">Tu carrito está vacío.</p>
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart">No hay productos agregados aún.</p>
         </div>
         <div class="cart-footer">
-            <div class="total-section">
-                <span>Total:</span>
-                <span id="cartTotal">$0</span>
+            <div class="cart-total">
+                <span>Total a pagar:</span>
+                <span id="cart-total-price">$0</span>
             </div>
-            <div class="payment-methods">
-                <label for="paymentSelect">Selecciona medio de pago:</label>
-                <select id="paymentSelect">
-                    <option value="mercado_pago">Mercado Pago</option>
-                    <option value="cuenta_dni">Cuenta DNI</option>
-                    <option value="paypal">PayPal</option>
-                    <option value="transferencia">Transferencia Bancaria</option>
-                    <option value="efectivo">Efectivo (Pago en Local)</option>
-                </select>
+            
+            <!-- SECCIÓN DE SELECCIÓN DE PAGO (REDIRIGE A APP O TIENDA) -->
+            <div class="payment-section">
+                <h4>Selecciona método de pago:</h4>
+                <div class="payment-options">
+                    <button type="button" class="btn-payment" onclick="payWithApp('mercadopago')">
+                        <i class="fa-solid fa-mobile-screen"></i> Mercado Pago
+                    </button>
+                    <button type="button" class="btn-payment" onclick="payWithApp('modo')">
+                        <i class="fa-solid fa-wallet"></i> MODO
+                    </button>
+                    <button type="button" class="btn-payment" onclick="payWithApp('uala')">
+                        <i class="fa-solid fa-credit-card"></i> Ualá
+                    </button>
+                    <button type="button" class="btn-payment" onclick="payWithApp('tarjeta')">
+                        <i class="fa-solid fa-globe"></i> Web / Tarjeta
+                    </button>
+                </div>
             </div>
-            <button class="checkout-btn" onclick="checkout()">Finalizar Compra</button>
         </div>
     </div>
 
-    <footer id="contacto">
-        <h3>IndustrialPro</h3>
-        <p>Ventas mayoristas y minoristas de herramientas, tornillos y máquinas.</p>
-        <p style="margin-top: 1rem;">📞 Teléfono: +54 11 1234-5678 | 📧 Email: ventas@industrialpro.com.ar</p>
-        <p style="margin-top: 1rem;">&copy; 2026 IndustrialPro. Todos los derechos reservados.</p>
+    <!-- CONTACTO Y UBICACIÓN -->
+    <section class="contact">
+        <div class="container contact-grid">
+            <div class="contact-info">
+                <h2>Visítanos o Consúltanos</h2>
+                <p><i class="fa-solid fa-location-dot"></i> Av. Principal 1234, Zona Comercial</p>
+                <p><i class="fa-solid fa-clock"></i> Lunes a Sábados de 08:00 a 19:00 hs.</p>
+                <p><i class="fa-solid fa-phone"></i> +54 9 11 1234-5678</p>
+                <p><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/5491112345678" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600;">Escríbenos por WhatsApp</a></p>
+            </div>
+            <div class="map-box">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <p>Ferretería Central</p>
+                <span class="map-note">Atención personalizada a gremios y particulares</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Ferretería Central. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- SCRIPT DE INTERACCIÓN, CARRITO Y PASARELA DE PAGO INTELIGENTE -->
     <script>
         let cart = [];
+        let quantities = {
+            'prod-1': 1, 'prod-2': 1, 'prod-3': 1, 'prod-4': 1,
+            'prod-5': 1, 'prod-6': 1, 'prod-7': 1, 'prod-8': 1
+        };
 
-        function toggleCart() {
-            const drawer = document.getElementById('cartDrawer');
-            const overlay = document.getElementById('overlay');
-            drawer.classList.toggle('open');
-            overlay.classList.toggle('active');
+        function changeQty(prodId, delta) {
+            if (!quantities[prodId]) quantities[prodId] = 1;
+            quantities[prodId] += delta;
+            if (quantities[prodId] < 1) quantities[prodId] = 1;
+            const span = document.getElementById('qty-' + prodId);
+            if (span) span.textContent = quantities[prodId];
         }
 
-        function addToCart(name, price) {
-            const existingItem = cart.find(item => item.name === name);
-            if (existingItem) {
-                existingItem.quantity += 1;
+        function addItemWithAnimation(event, name, price, prodId, cardId) {
+            const qtyToAdd = quantities[prodId] || 1;
+            addToCart(name, price, qtyToAdd);
+
+            const card = document.getElementById(cardId);
+            const cartBtn = document.getElementById('cart-btn');
+
+            if (card && cartBtn) {
+                const cardRect = card.getBoundingClientRect();
+                const cartRect = cartBtn.getBoundingClientRect();
+
+                const flyer = document.createElement('div');
+                flyer.textContent = '🛠️📦';
+                flyer.style.position = 'fixed';
+                flyer.style.left = (cardRect.left + (cardRect.width / 2)) + 'px';
+                flyer.style.top = (cardRect.top + (cardRect.height / 2)) + 'px';
+                flyer.style.zIndex = '99999';
+                flyer.style.transition = 'all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                flyer.style.fontSize = '2rem';
+                flyer.style.pointerEvents = 'none';
+                
+                document.body.appendChild(flyer);
+
+                setTimeout(() => {
+                    flyer.style.left = (cartRect.left + (cartRect.width / 2)) + 'px';
+                    flyer.style.top = (cartRect.top + 10) + 'px';
+                    flyer.style.transform = 'scale(0.3) rotate(720deg)';
+                    flyer.style.opacity = '0.2';
+                }, 30);
+
+                setTimeout(() => {
+                    flyer.remove();
+                    cartBtn.classList.add('bounce');
+                    setTimeout(() => cartBtn.classList.remove('bounce'), 500);
+                }, 700);
+            }
+
+            showToast(name, qtyToAdd);
+        }
+
+        function showToast(productName, qty) {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.textContent = `¡${qty}x "${productName}" agregado al pedido!`;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function addToCart(name, price, qty) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += qty;
             } else {
-                cart.push({ name, price, quantity: 1 });
-            }
-            updateCartUI();
-            // Abre automáticamente el carrito al agregar un producto para mejor experiencia de usuario
-            if (!document.getElementById('cartDrawer').classList.contains('open')) {
-                toggleCart();
-            }
-        }
-
-        function changeQuantity(name, change) {
-            const item = cart.find(item => item.name === name);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) {
-                    cart = cart.filter(i => i.name !== name);
-                }
+                cart.push({ name, price, qty });
             }
             updateCartUI();
         }
 
         function updateCartUI() {
-            const cartCount = document.getElementById('cartCount');
-            const cartItemsContainer = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotalPrice = document.getElementById('cart-total-price');
 
-            let totalCount = 0;
-            let totalPrice = 0;
+            let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartCount.textContent = totalQty;
 
             if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p style="text-align: center; color: #64748b; margin-top: 2rem;">Tu carrito está vacío.</p>';
-            } else {
-                cartItemsContainer.innerHTML = '';
-                cart.forEach(item => {
-                    totalCount += item.quantity;
-                    totalPrice += item.price * item.quantity;
-
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'cart-item';
-                    itemDiv.innerHTML = `
-                        <div class="cart-item-info">
-                            <h4>${item.name}</h4>
-                            <p>$${item.price.toLocaleString()} x ${item.quantity}</p>
-                        </div>
-                        <div class="cart-item-actions">
-                            <button onclick="changeQuantity('${item.name}', -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="changeQuantity('${item.name}', 1)">+</button>
-                        </div>
-                    `;
-                    cartItemsContainer.appendChild(itemDiv);
-                });
-            }
-
-            cartCount.textContent = totalCount;
-            cartTotal.textContent = '$' + totalPrice.toLocaleString();
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert('El carrito está vacío. Agrega productos antes de finalizar la compra.');
+                cartItems.innerHTML = '<p class="empty-cart">No hay productos agregados aún.</p>';
+                cartTotalPrice.textContent = '$0';
                 return;
             }
-            const paymentMethod = document.getElementById('paymentSelect').value;
-            alert('¡Compra iniciada con éxito!\nMedio de pago seleccionado: ' + paymentMethod.replace('_', ' ').toUpperCase() + '\n\nSerás redirigido a la pasarela de pago correspondiente.');
-            cart = [];
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                let subtotal = item.price * item.qty;
+                total += subtotal;
+                html += `
+                    <div class="cart-item">
+                        <div>
+                            <h4>${item.name}</h4>
+                            <p>$${item.price.toLocaleString()} x ${item.qty} = $${subtotal.toLocaleString()}</p>
+                        </div>
+                        <button type="button" onclick="removeItem(${index})" class="btn-remove"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            cartItems.innerHTML = html;
+            cartTotalPrice.textContent = '$' + total.toLocaleString();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
             updateCartUI();
-            toggleCart();
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('open');
+        }
+
+        /* FUNCIÓN DE PAGO INTELIGENTE CON REDIRECCIÓN A APP O TIENDAS OFICIALES */
+        function payWithApp(platform) {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío. Agrega herramientas o productos antes de pagar.');
+                return;
+            }
+
+            let appScheme = '';
+            let playStoreUrl = '';
+            let appStoreUrl = '';
+
+            if (platform === 'mercadopago') {
+                appScheme = 'mercadopago://';
+                playStoreUrl = 'https://play.google.com/store/apps/details?id=com.mercadopagoData';
+                appStoreUrl = 'https://apps.apple.com/ar/app/mercadopago-cuenta-digital/id925436644';
+            } else if (platform === 'modo') {
+                appScheme = 'modo://';
+                playStoreUrl = 'https://play.google.com/store/apps/details?id=com.modo.app';
+                appStoreUrl = 'https://apps.apple.com/ar/app/modo/id1504928131';
+            } else if (platform === 'uala') {
+                appScheme = 'uala://';
+                playStoreUrl = 'https://play.google.com/store/apps/details?id=com.uala';
+                appStoreUrl = 'https://apps.apple.com/ar/app/ual%C3%A1/id1298402120';
+            } else {
+                alert('Abriendo pasarela de pago web segura...');
+                return;
+            }
+
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            const isAndroid = /android/i.test(userAgent);
+
+            const start = Date.now();
+            window.location.href = appScheme;
+
+            setTimeout(function() {
+                const elapsed = Date.now() - start;
+                if (elapsed < 1500) {
+                    if (isIOS) {
+                        window.location.href = appStoreUrl;
+                    } else if (isAndroid) {
+                        window.location.href = playStoreUrl;
+                    } else {
+                        window.location.href = playStoreUrl;
+                    }
+                }
+            }, 1000);
         }
     </script>
 </body>
-    </html>
-    
+</html>
