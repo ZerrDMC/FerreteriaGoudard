@@ -434,7 +434,7 @@
             margin-bottom: 15px;
         }
 
-        /* SECCIÓN DE MÉTODOS DE PAGO SEGUROS (INTEGRADOS) */
+        /* SECCIÓN DE MÉTODOS DE PAGO CON LINKS OFICIALES */
         .payment-section {
             margin-top: 10px;
             border-top: 1px dashed #cbd5e1;
@@ -467,6 +467,7 @@
             gap: 6px;
             transition: all 0.2s;
             color: var(--text-dark);
+            text-decoration: none;
         }
 
         .btn-payment:hover {
@@ -733,20 +734,20 @@
                 <span id="cart-total-price">$0</span>
             </div>
             
-            <!-- SECCIÓN DE SELECCIÓN DE PAGO SEGURA -->
+            <!-- SECCIÓN DE SELECCIÓN DE PAGO CON LINKS OFICIALES Y ALIAS DE PRUEBA -->
             <div class="payment-section">
                 <h4>Selecciona método de pago:</h4>
                 <div class="payment-options">
-                    <button type="button" class="btn-payment" onclick="payWithApp('Mercado Pago')">
+                    <button type="button" class="btn-payment" onclick="payWithApp('Mercado Pago', 'https://www.mercadopago.com.ar/', 'mercadopago://')">
                         <i class="fa-solid fa-mobile-screen"></i> Mercado Pago
                     </button>
-                    <button type="button" class="btn-payment" onclick="payWithApp('MODO')">
+                    <button type="button" class="btn-payment" onclick="payWithApp('MODO', 'https://modo.com.ar/', 'modo://')">
                         <i class="fa-solid fa-wallet"></i> MODO
                     </button>
-                    <button type="button" class="btn-payment" onclick="payWithApp('Ualá')">
+                    <button type="button" class="btn-payment" onclick="payWithApp('Ualá', 'https://www.uala.com.ar/', 'uala://')">
                         <i class="fa-solid fa-credit-card"></i> Ualá
                     </button>
-                    <button type="button" class="btn-payment" onclick="payWithApp('Tarjeta / Web')">
+                    <button type="button" class="btn-payment" onclick="payWithApp('Tarjeta / Web', 'https://www.visa.com.ar/', '')">
                         <i class="fa-solid fa-globe"></i> Tarjeta / Web
                     </button>
                 </div>
@@ -777,7 +778,7 @@
         <p>&copy; 2026 Ferretería Central. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- SCRIPT DE INTERACCIÓN, CARRITO Y PASARELA DE PAGO SEGURA -->
+    <!-- SCRIPT DE INTERACCIÓN, CARRITO Y APERTURA DE APPS CON ALIAS Y LINKS OFICIALES -->
     <script>
         let cart = [];
         let quantities = {
@@ -897,57 +898,32 @@
             drawer.classList.toggle('open');
         }
 
-        /* FUNCIÓN DE PAGO SEGURA E INTEGRADA (SIN REDIRECCIONES EXTERNAS) */
-        function payWithApp(platform) {
+        /* FUNCIÓN DE PAGO CON ALIAS DE PRUEBA Y APERTURA DE APP / REDIRECCIÓN A LINK OFICIAL */
+        function payWithApp(platformName, officialUrl, appScheme) {
             if (cart.length === 0) {
                 alert('Tu carrito está vacío. Agrega herramientas o productos antes de pagar.');
                 return;
             }
 
+            const alias = "¡es de prueba no mandes dinero!";
             const totalPrice = document.getElementById('cart-total-price').textContent;
-            
-            // Simulación de pasarela de pago segura sin salir del sitio web
-            const confirmar = confirm(`Estás por procesar tu pago de ${totalPrice} utilizando ${platform}.\n\n¿Deseas confirmar la transacción de forma segura?`);
-            
-            if (confirmar) {
-                alert(`¡Pago exitoso procesado a través de ${platform}! Gracias por tu compra en Ferretería Central.`);
-                cart = [];
-                updateCartUI();
-                toggleCart();
+
+            alert(`Alias de pago: ${alias}\nTotal: ${totalPrice}\n\nSe abrirá la app de ${platformName} para completar la transferencia.`);
+
+            if (appScheme) {
+                const start = Date.now();
+                window.location.href = appScheme;
+
+                setTimeout(function() {
+                    const elapsed = Date.now() - start;
+                    if (elapsed < 1500) {
+                        window.location.href = officialUrl;
+                    }
+                }, 1000);
+            } else {
+                window.location.href = officialUrl;
             }
         }
-        function payWithApp(platform) {
-    if (cart.length === 0) {
-        alert('Tu carrito está vacío. Agrega productos antes de pagar.');
-        return;
-    }
-
-    const alias = "¡es de prueba no mandes dinero!";
-    const totalPrice = document.getElementById('cart-total-price').textContent;
-
-    // Mostrar el mensaje con el alias antes de abrir la aplicación
-    alert(`Alias de pago: ${alias}\nTotal: ${totalPrice}\n\nSe abrirá la aplicación de ${platform} para completar la transferencia.`);
-
-    let appScheme = 'https://www.mercadopago.com.ar/';
-    let storeUrl = '';
-
-    if (platform === 'Mercado Pago') {
-        appScheme = 'mercadopago://';
-        storeUrl = 'https://play.google.com/store/apps/details?id=com.mercadopagoData';
-
-    // Intentar abrir la aplicación de manera automática
-    const start = Date.now();
-    window.location.href = appScheme;
-
-    // Si la app no está instalada, redirigir a la tienda correspondiente
-    setTimeout(function() {
-        const elapsed = Date.now() - start;
-        if (elapsed < 1500) {
-            window.location.href = storeUrl;
-        }
-    }, 1000);
-        }
-        
     </script>
 </body>
 </html>
