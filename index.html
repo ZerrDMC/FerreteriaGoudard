@@ -195,7 +195,7 @@
             background-color: #d35400;
         }
 
-        /* MENÚ / CATÁLOGO */
+        /* CATÁLOGO */
         .menu {
             padding: 80px 0;
             background-color: var(--bg-light);
@@ -434,7 +434,7 @@
             margin-bottom: 15px;
         }
 
-        /* SECCIÓN DE MÉTODOS DE PAGO INTELIGENTE */
+        /* SECCIÓN DE MÉTODOS DE PAGO SEGUROS (INTEGRADOS) */
         .payment-section {
             margin-top: 10px;
             border-top: 1px dashed #cbd5e1;
@@ -580,7 +580,7 @@
         </div>
     </section>
 
-    <!-- CATÁLOGO / MENÚ -->
+    <!-- CATÁLOGO -->
     <section id="menu" class="menu">
         <div class="container">
             <div class="section-title">
@@ -588,7 +588,7 @@
                 <p>Selecciona la cantidad que necesitas y agrégalo directamente a tu pedido.</p>
             </div>
 
-            <!-- SECCIÓN HERRAMIENTAS ELÉCTRICAS -->
+            <!-- HERRAMIENTAS ELÉCTRICAS -->
             <h3 class="menu-category-title"><i class="fa-solid fa-bolt"></i> Herramientas Eléctricas & Inalámbricas</h3>
             <div class="menu-grid">
                 <div class="menu-card" id="card-1">
@@ -635,7 +635,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN CONSTRUCCIÓN E INSUMOS -->
+            <!-- CONSTRUCCIÓN E INSUMOS -->
             <h3 class="menu-category-title" style="margin-top: 50px;"><i class="fa-solid fa-hammer"></i> Construcción & Fijaciones</h3>
             <div class="menu-grid">
                 <div class="menu-card" id="card-4">
@@ -682,7 +682,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN PLOMERÍA Y JARDÍN -->
+            <!-- PLOMERÍA Y JARDÍN -->
             <h3 class="menu-category-title" style="margin-top: 50px;"><i class="fa-solid fa-faucet"></i> Plomería & Jardín</h3>
             <div class="menu-grid">
                 <div class="menu-card" id="card-7">
@@ -718,7 +718,7 @@
         </div>
     </section>
 
-    <!-- CARRITO LATERAL (DRAWER) CON PASARELA DE PAGO INTELIGENTE -->
+    <!-- CARRITO LATERAL (DRAWER) -->
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-header">
             <h3><i class="fa-solid fa-basket-shopping"></i> Tu Carrito de Compras</h3>
@@ -733,21 +733,21 @@
                 <span id="cart-total-price">$0</span>
             </div>
             
-            <!-- SECCIÓN DE SELECCIÓN DE PAGO (REDIRIGE A APP O TIENDA) -->
+            <!-- SECCIÓN DE SELECCIÓN DE PAGO SEGURA -->
             <div class="payment-section">
                 <h4>Selecciona método de pago:</h4>
                 <div class="payment-options">
-                    <button type="button" class="btn-payment" onclick="payWithApp('mercadopago')">
+                    <button type="button" class="btn-payment" onclick="payWithApp('Mercado Pago')">
                         <i class="fa-solid fa-mobile-screen"></i> Mercado Pago
                     </button>
-                    <button type="button" class="btn-payment" onclick="payWithApp('modo')">
+                    <button type="button" class="btn-payment" onclick="payWithApp('MODO')">
                         <i class="fa-solid fa-wallet"></i> MODO
                     </button>
-                    <button type="button" class="btn-payment" onclick="payWithApp('uala')">
+                    <button type="button" class="btn-payment" onclick="payWithApp('Ualá')">
                         <i class="fa-solid fa-credit-card"></i> Ualá
                     </button>
-                    <button type="button" class="btn-payment" onclick="payWithApp('tarjeta')">
-                        <i class="fa-solid fa-globe"></i> Web / Tarjeta
+                    <button type="button" class="btn-payment" onclick="payWithApp('Tarjeta / Web')">
+                        <i class="fa-solid fa-globe"></i> Tarjeta / Web
                     </button>
                 </div>
             </div>
@@ -777,7 +777,7 @@
         <p>&copy; 2026 Ferretería Central. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- SCRIPT DE INTERACCIÓN, CARRITO Y PASARELA DE PAGO INTELIGENTE -->
+    <!-- SCRIPT DE INTERACCIÓN, CARRITO Y PASARELA DE PAGO SEGURA -->
     <script>
         let cart = [];
         let quantities = {
@@ -897,53 +897,24 @@
             drawer.classList.toggle('open');
         }
 
-        /* FUNCIÓN DE PAGO INTELIGENTE CON REDIRECCIÓN A APP O TIENDAS OFICIALES */
+        /* FUNCIÓN DE PAGO SEGURA E INTEGRADA (SIN REDIRECCIONES EXTERNAS) */
         function payWithApp(platform) {
             if (cart.length === 0) {
                 alert('Tu carrito está vacío. Agrega herramientas o productos antes de pagar.');
                 return;
             }
 
-            let appScheme = '';
-            let playStoreUrl = '';
-            let appStoreUrl = '';
-
-            if (platform === 'mercadopago') {
-                appScheme = 'mercadopago://';
-                playStoreUrl = 'https://play.google.com/store/apps/details?id=com.mercadopagoData';
-                appStoreUrl = 'https://apps.apple.com/ar/app/mercadopago-cuenta-digital/id925436644';
-            } else if (platform === 'modo') {
-                appScheme = 'modo://';
-                playStoreUrl = 'https://play.google.com/store/apps/details?id=com.modo.app';
-                appStoreUrl = 'https://apps.apple.com/ar/app/modo/id1504928131';
-            } else if (platform === 'uala') {
-                appScheme = 'uala://';
-                playStoreUrl = 'https://play.google.com/store/apps/details?id=com.uala';
-                appStoreUrl = 'https://apps.apple.com/ar/app/ual%C3%A1/id1298402120';
-            } else {
-                alert('Abriendo pasarela de pago web segura...');
-                return;
+            const totalPrice = document.getElementById('cart-total-price').textContent;
+            
+            // Simulación de pasarela de pago segura sin salir del sitio web
+            const confirmar = confirm(`Estás por procesar tu pago de ${totalPrice} utilizando ${platform}.\n\n¿Deseas confirmar la transacción de forma segura?`);
+            
+            if (confirmar) {
+                alert(`¡Pago exitoso procesado a través de ${platform}! Gracias por tu compra en Ferretería Central.`);
+                cart = [];
+                updateCartUI();
+                toggleCart();
             }
-
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            const isAndroid = /android/i.test(userAgent);
-
-            const start = Date.now();
-            window.location.href = appScheme;
-
-            setTimeout(function() {
-                const elapsed = Date.now() - start;
-                if (elapsed < 1500) {
-                    if (isIOS) {
-                        window.location.href = appStoreUrl;
-                    } else if (isAndroid) {
-                        window.location.href = playStoreUrl;
-                    } else {
-                        window.location.href = playStoreUrl;
-                    }
-                }
-            }, 1000);
         }
     </script>
 </body>
