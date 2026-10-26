@@ -132,16 +132,173 @@
         }
         .card button {
             width: 100%;
-            padding: 0.6rem;
+            padding: 0.75rem;
             background-color: var(--primary-color);
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 500;
+            transition: background 0.2s;
         }
         .card button:hover {
-            background-color: #0f172a;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        /* Botón flotante del carrito */
+        .cart-float-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 999;
+            transition: transform 0.2s;
+        }
+        .cart-float-btn:hover {
+            transform: scale(1.05);
+        }
+        .cart-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50%;
+            font-size: 0.9rem;
+        }
+
+        /* Menú lateral del carrito (Drawer) */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s ease-in-out;
+        }
+        .cart-drawer.open {
+            right: 0;
+        }
+        .cart-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .cart-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.75rem 0;
+        }
+        .cart-item-info h4 {
+            font-size: 0.95rem;
+            color: var(--primary-color);
+        }
+        .cart-item-info p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cart-item-actions button {
+            background: #e2e8f0;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .cart-footer {
+            padding: 1.5rem;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+        }
+        .total-section {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .payment-methods {
+            margin-bottom: 1rem;
+        }
+        .payment-methods label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .payment-methods select {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+        }
+        .checkout-btn {
+            width: 100%;
+            background-color: #059669;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .checkout-btn:hover {
+            background-color: #047857;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 998;
+            display: none;
+        }
+        .overlay.active {
+            display: block;
         }
         footer {
             background-color: var(--primary-color);
@@ -183,8 +340,8 @@
                 <div class="card-content">
                     <span>Herramientas Eléctricas</span>
                     <h3>Taladro Percutor Profesional 850W</h3>
-                    <p class="price">$145.000</p>
-                    <button onclick="alert('Producto agregado al presupuesto')">Consultar / Comprar</button>
+                    <p class="price" data-value="145000">$145.000</p>
+                    <button onclick="addToCart('Taladro Percutor Profesional 850W', 145000)">Agregar al Carrito</button>
                 </div>
             </div>
 
@@ -194,8 +351,8 @@
                 <div class="card-content">
                     <span>Tornillería</span>
                     <h3>Kit Tornillos Allen Alta Resistencia (Caja x 500u)</h3>
-                    <p class="price">$32.400</p>
-                    <button onclick="alert('Producto agregado al presupuesto')">Consultar / Comprar</button>
+                    <p class="price" data-value="32400">$32.400</p>
+                    <button onclick="addToCart('Kit Tornillos Allen Alta Resistencia', 32400)">Agregar al Carrito</button>
                 </div>
             </div>
 
@@ -205,8 +362,8 @@
                 <div class="card-content">
                     <span>Lubricación</span>
                     <h3>Lubricador para Máquinas Neumáticas</h3>
-                    <p class="price">$20.995</p>
-                    <button onclick="alert('Producto agregado al presupuesto')">Consultar / Comprar</button>
+                    <p class="price" data-value="20995">$20.995</p>
+                    <button onclick="addToCart('Lubricador para Máquinas Neumáticas', 20995)">Agregar al Carrito</button>
                 </div>
             </div>
 
@@ -216,8 +373,8 @@
                 <div class="card-content">
                     <span>Máquinas</span>
                     <h3>Compresor de Aire Monofásico 50 Litros</h3>
-                    <p class="price">$380.000</p>
-                    <button onclick="alert('Producto agregado al presupuesto')">Consultar / Comprar</button>
+                    <p class="price" data-value="380000">$380.000</p>
+                    <button onclick="addToCart('Compresor de Aire Monofásico 50L', 380000)">Agregar al Carrito</button>
                 </div>
             </div>
 
@@ -227,8 +384,8 @@
                 <div class="card-content">
                     <span>Insumos Químicos</span>
                     <h3>Afloja Tuercas y Lubricante Multiuso 400ml</h3>
-                    <p class="price">$5.300</p>
-                    <button onclick="alert('Producto agregado al presupuesto')">Consultar / Comprar</button>
+                    <p class="price" data-value="5300">$5.300</p>
+                    <button onclick="addToCart('Afloja Tuercas y Lubricante 400ml', 5300)">Agregar al Carrito</button>
                 </div>
             </div>
 
@@ -238,10 +395,46 @@
                 <div class="card-content">
                     <span>Herramientas Manuales</span>
                     <h3>Set de Llaves Combinadas Cromo Vanadio (12 Pzas)</h3>
-                    <p class="price">$48.500</p>
-                    <button onclick="alert('Producto agregado al presupuesto')">Consultar / Comprar</button>
+                    <p class="price" data-value="48500">$48.500</p>
+                    <button onclick="addToCart('Set de Llaves Combinadas (12 Pzas)', 48500)">Agregar al Carrito</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Botón Flotante del Carrito -->
+    <button class="cart-float-btn" onclick="toggleCart()">
+        🛒 Carrito <span class="cart-badge" id="cartCount">0</span>
+    </button>
+
+    <!-- Fondo Oscuro al Abrir Carrito -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <!-- Menú Desplegable Lateral del Carrito -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Tu Carrito de Compras</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-body" id="cartItems">
+            <p style="text-align: center; color: #64748b; margin-top: 2rem;">Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-section">
+                <span>Total:</span>
+                <span id="cartTotal">$0</span>
+            </div>
+            <div class="payment-methods">
+                <label for="paymentSelect">Selecciona medio de pago:</label>
+                <select id="paymentSelect">
+                    <option value="mercado_pago">Mercado Pago</option>
+                    <option value="cuenta_dni">Cuenta DNI</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="transferencia">Transferencia Bancaria</option>
+                    <option value="efectivo">Efectivo (Pago en Local)</option>
+                </select>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Finalizar Compra</button>
         </div>
     </div>
 
@@ -252,6 +445,90 @@
         <p style="margin-top: 1rem;">&copy; 2026 IndustrialPro. Todos los derechos reservados.</p>
     </footer>
 
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('overlay');
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+            // Abre automáticamente el carrito al agregar un producto para mejor experiencia de usuario
+            if (!document.getElementById('cartDrawer').classList.contains('open')) {
+                toggleCart();
+            }
+        }
+
+        function changeQuantity(name, change) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: #64748b; margin-top: 2rem;">Tu carrito está vacío.</p>';
+            } else {
+                cartItemsContainer.innerHTML = '';
+                cart.forEach(item => {
+                    totalCount += item.quantity;
+                    totalPrice += item.price * item.quantity;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'cart-item';
+                    itemDiv.innerHTML = `
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>$${item.price.toLocaleString()} x ${item.quantity}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button onclick="changeQuantity('${item.name}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.name}', 1)">+</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemDiv);
+                });
+            }
+
+            cartCount.textContent = totalCount;
+            cartTotal.textContent = '$' + totalPrice.toLocaleString();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('El carrito está vacío. Agrega productos antes de finalizar la compra.');
+                return;
+            }
+            const paymentMethod = document.getElementById('paymentSelect').value;
+            alert('¡Compra iniciada con éxito!\nMedio de pago seleccionado: ' + paymentMethod.replace('_', ' ').toUpperCase() + '\n\nSerás redirigido a la pasarela de pago correspondiente.');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+    </script>
 </body>
-          </html>
-          
+    </html>
+    
