@@ -928,22 +928,12 @@
     // Mostrar el mensaje con el alias antes de abrir la aplicación
     alert(`Alias de pago: ${alias}\nTotal: ${totalPrice}\n\nSe abrirá la aplicación de ${platform} para completar la transferencia.`);
 
-    let appScheme = '';
+    let appScheme = 'https://www.mercadopago.com.ar/';
     let storeUrl = '';
 
     if (platform === 'Mercado Pago') {
         appScheme = 'mercadopago://';
         storeUrl = 'https://play.google.com/store/apps/details?id=com.mercadopagoData';
-    } else if (platform === 'MODO') {
-        appScheme = 'modo://';
-        storeUrl = 'https://play.google.com/store/apps/details?id=com.modo.app';
-    } else if (platform === 'Ualá') {
-        appScheme = 'uala://';
-        storeUrl = 'https://play.google.com/store/apps/details?id=com.uala';
-    } else {
-        alert('Procesando pago web seguro...');
-        return;
-    }
 
     // Intentar abrir la aplicación de manera automática
     const start = Date.now();
